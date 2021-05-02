@@ -47,21 +47,21 @@ class Distribution(BaseRealization):
 @click.command()
 @common_cli_options
 @click.option(
-    "--a",
+    "--lower",
     "-a",
     help="Lower limit of distribution",
     required=True,
     type=int,
 )
 @click.option(
-    "--b",
+    "--upper",
     "-b",
     help="Upper limit of distribution",
     required=True,
     type=int,
 )
 @click.option(
-    "--c",
+    "--mode",
     "-c",
     help="Mode of distribution",
     required=True,

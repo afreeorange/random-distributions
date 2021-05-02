@@ -2,6 +2,7 @@ import sys
 from logging import NullHandler
 
 import click
+import progressbar
 
 import statistical_distribution_realizations
 from statistical_distribution_realizations.dist_base import BaseRealization
@@ -24,6 +25,13 @@ def handle_generation(
         log.error(f"Oh no: {str(e)}")
         sys.exit(1)
 
+    bar = progressbar.ProgressBar(
+        widgets=[
+            progressbar.Bar(),
+            progressbar.Counter(),
+        ],
+        max_value=number,
+    ).start()
     o = output_file.rsplit(".", 1)[0]
     _output_file = f"{o}.txt"
     _output_graph = f"{o}.png"
@@ -32,6 +40,9 @@ def handle_generation(
     with open(_output_file, mode="w", encoding="utf-8") as f:
         for _ in range(number):
             f.write(f"{str(distribution.realization())}\n")
+            bar.update(_ + 1)
+
+    bar.finish()
 
     if graph:
         log.info(f"Writing graph to {_output_graph}")
