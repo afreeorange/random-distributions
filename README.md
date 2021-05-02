@@ -15,14 +15,15 @@ poetry run realize triangular -a 1 -b 3 -c 2 -o test -g -n 100000
 ## TODO
 
 * [ ] Bernoulli
-* [ ] Geometric
-* [ ] Negative Binomial
+* [ ] Beta
 * [ ] Exponential
-* [ ] Normal
 * [ ] Gamma
-* [ ] Weibull
+* [ ] Geometric
+* [ ] Negative Binomial (Laplace)
+* [ ] Normal
 * [ ] Poisson
-* [ ] Triangular
+* [ ] Weibull
+* [x] Triangular
 
 ## License
 
