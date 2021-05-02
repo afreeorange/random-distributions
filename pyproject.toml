@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "statistical-distribution-realizations"
 version = "0.1.0"
-description = "A Small Library of some Common Statistical Distributions Implemented in Python"
+description = "A Small Library of some Common Statistical Distributions"
 authors = ["Nikhil Anand <mail@nikhil.io>"]
 
 [tool.poetry.dependencies]
