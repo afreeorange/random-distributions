@@ -123,7 +123,7 @@ poetry run realize weibull --lambda 1 --shape 1.5 --output-file output.txt --gra
 
 ### Dependencies
 
-The project uses 
+The project mainly uses 
 
 * [Click](https://click.palletsprojects.com/en/7.x/) for the CLI
 * [Seaborn](https://seaborn.pydata.org/) (with Matplotlib and Pandas) for its graphs
@@ -140,7 +140,7 @@ You would implement the actual realization in the `self.realization` of your dis
 
 Just copypasta an existing distribution and follow along 🤗
 
-### `examples` Generation
+### Generating the Stuff in `examples`
 
 ```console
 poetry run realize bernoulli --probability 0.32 --output-file examples/bernoulli.txt --graph
