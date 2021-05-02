@@ -1,3 +1,4 @@
+import math
 from random import uniform
 
 import click
@@ -20,14 +21,27 @@ class Distribution(BaseRealization):
         return (self.c - self.a) / (self.b - self.a)
 
     @property
+    def params(self):
+        return f"(a={self.a}, b={self.b}, c={self.c})"
+
+    @property
     def name(self):
         return "Triangular"
 
     def realization(self):
-        return uniform(0.0, 1.0) + uniform(0.0, 1.0)
+        U = uniform(0, 1)
+        X = 0
+
+        if U < self._cdf:
+            X = self.a + math.sqrt(U * (self.b - self.a) * (self.c - self.a))
+        else:
+            X = self.b - math.sqrt((1 - U) * (self.b - self.a) * (self.b - self.c))
+
+        return X
 
     def check(self):
-        return True
+        if not (self.a < self.b and self.a <= self.c and self.c <= self.b):
+            raise ValueError("Invalid params. Rules: a < c and a ≤ c ≤ b")
 
 
 @click.command()

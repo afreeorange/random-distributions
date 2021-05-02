@@ -11,6 +11,10 @@ class BaseRealization(ABC):
     def name(self):
         pass
 
+    @abstractproperty
+    def params(self):
+        pass
+
     @abstractmethod
     def realization(self):
         pass

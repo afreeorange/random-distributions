@@ -4,6 +4,12 @@
 
 ## Usage
 
+```console
+# Triangular
+poetry run realize triangular -a 1 -b 3 -c 2 -o test -g -n 100000
+
+```
+
 ## Development
 
 ## TODO

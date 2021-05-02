@@ -1,3 +1,4 @@
+import sys
 from logging import NullHandler
 
 import click
@@ -17,6 +18,12 @@ def handle_generation(
 ) -> None:
     log.info(f"Generating {number:,} realizations")
 
+    try:
+        distribution.check()
+    except Exception as e:
+        log.error(f"Oh no: {str(e)}")
+        sys.exit(1)
+
     o = output_file.rsplit(".", 1)[0]
     _output_file = f"{o}.txt"
     _output_graph = f"{o}.png"
@@ -28,7 +35,7 @@ def handle_generation(
 
     if graph:
         log.info(f"Writing graph to {_output_graph}")
-        plot(_output_file, _output_graph, number, distribution.name)
+        plot(_output_file, _output_graph, number, distribution)
 
 
 def common_cli_options(f):
