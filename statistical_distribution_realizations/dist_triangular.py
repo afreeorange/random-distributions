@@ -5,7 +5,6 @@ import click
 
 from .dist_base import BaseRealization
 from .helpers import common_cli_options, handle_generation
-from .logger import log
 
 
 class Distribution(BaseRealization):
@@ -15,12 +14,12 @@ class Distribution(BaseRealization):
         self.c = c
 
     @property
-    def type(self):
-        return "Continuous"
-
-    @property
     def _cdf(self):
         return (self.c - self.a) / (self.b - self.a)
+
+    @property
+    def type(self):
+        return "Continuous"
 
     @property
     def params(self):

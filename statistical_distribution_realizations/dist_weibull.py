@@ -5,13 +5,12 @@ import click
 
 from .dist_base import BaseRealization
 from .helpers import common_cli_options, handle_generation
-from .logger import log
 
 
 class Distribution(BaseRealization):
-    def __init__(self, rate_param, beta):
+    def __init__(self, rate_param, shape):
         self.rate_param = rate_param
-        self.beta = beta
+        self.shape = shape
 
     @property
     def type(self):
@@ -23,11 +22,11 @@ class Distribution(BaseRealization):
 
     @property
     def params(self):
-        return f"lambda={self.rate_param}, beta={self.beta}"
+        return f"lambda={self.rate_param}, k={self.shape}"
 
     def realization(self):
         U = uniform(0, 1)
-        X = (1 / self.rate_param) * ((-1 * math.log(U)) ** (1 / self.beta))
+        X = (1 / self.rate_param) * ((-1 * math.log(U)) ** (1 / self.shape))
 
         return X
 
@@ -35,7 +34,7 @@ class Distribution(BaseRealization):
         if self.rate_param < 0:
             raise ValueError("Lambda/Rate Param must be greater than zero.")
 
-        if self.beta < 0:
+        if self.shape < 0:
             raise ValueError("Shape param must be greater than zero.")
 
 
@@ -50,12 +49,12 @@ class Distribution(BaseRealization):
     type=float,
 )
 @click.option(
-    "--beta",
-    "-b",
-    help="Beta; the shape parameter",
+    "--shape",
+    "-k",
+    help="k; the shape parameter",
     required=True,
     type=float,
 )
-def cli(rate_param, beta, number, output_file, graph):
-    d = Distribution(rate_param, beta)
+def cli(rate_param, shape, number, output_file, graph):
+    d = Distribution(rate_param, shape)
     handle_generation(d, number, output_file, graph)

@@ -5,7 +5,6 @@ import click
 
 from .dist_base import BaseRealization
 from .helpers import common_cli_options, handle_generation
-from .logger import log
 
 
 class Distribution(BaseRealization):

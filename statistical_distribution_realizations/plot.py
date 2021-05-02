@@ -19,12 +19,13 @@ def plot(
 ) -> None:
     try:
         data = pd.read_csv(path_to_input_file)
+        is_continuous = True if distribution.type == "Continuous" else False
 
         sns.histplot(
             data,
             legend=False,
             fill=False,
-            kde=True if distribution.type == "Discrete" else False,
+            kde=is_continuous,
         )
 
         params = f"({distribution.params})" if distribution.params else ""

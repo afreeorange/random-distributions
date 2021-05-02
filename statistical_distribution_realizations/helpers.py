@@ -1,4 +1,5 @@
 import sys
+from math import dist
 
 import click
 import progressbar
@@ -25,33 +26,45 @@ def handle_generation(
         log.error(f"Oh no: {str(e)}")
         sys.exit(1)
 
-    bar = progressbar.ProgressBar(
-        widgets=[
-            progressbar.Bar(),
-            progressbar.Counter(),
-        ],
-        max_value=number,
-    ).start()
-
     o = output_file.rsplit(".", 1)[0]
     _output_file = f"{o}.txt"
     _output_graph = f"{o}.png"
 
     log.info(f"Writing output to {_output_file}")
     with open(_output_file, mode="w", encoding="utf-8") as f:
-        for _ in range(number):
-            X = distribution.realization()
+        # Poisson is slightly weird because it doesn't have any
+        # point-realizations. You generate a set of Unif(0,1) and sort them
+        # (and shift them if need be) for the interarrival times 🤷‍♂️ The
+        # result in this case comes sorted. It's an array and not a single
+        # number.
 
-            # Standard Normal is the only one that returns a Tuple
-            # (because we use Box-Muller)
-            if isinstance(X, tuple):
-                f.write(f"{X[0]}, {X[1]}\n")
-            else:
-                f.write(f"{X}\n")
+        if distribution.name == "Poisson":
+            log.warn("Poisson distribution! Sorting might take some time for large n!")
+            for _ in distribution.realization():
+                f.write(f"{_}\n")
 
-            bar.update(_ + 1)
+        else:
+            bar = progressbar.ProgressBar(
+                widgets=[
+                    progressbar.Bar(),
+                    progressbar.Counter(),
+                ],
+                max_value=number,
+            ).start()
 
-    bar.finish()
+            for _ in range(number):
+                X = distribution.realization()
+
+                # Standard Normal is the only one that returns a Tuple
+                # (because we use Box-Muller)
+                if isinstance(X, tuple):
+                    f.write(f"{X[0]}, {X[1]}\n")
+                else:
+                    f.write(f"{X}\n")
+
+                bar.update(_ + 1)
+
+            bar.finish()
 
     if graph:
         log.info(f"Writing graph to {_output_graph}")
