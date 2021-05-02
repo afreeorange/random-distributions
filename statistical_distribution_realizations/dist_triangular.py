@@ -14,7 +14,9 @@ class Distribution(BaseRealization):
         self.b = b
         self.c = c
 
-        log.info(f"Triangular distribution with a={a}, b={b}, c={c}")
+    @property
+    def type(self):
+        return "Continuous"
 
     @property
     def _cdf(self):
@@ -22,7 +24,7 @@ class Distribution(BaseRealization):
 
     @property
     def params(self):
-        return f"(a={self.a}, b={self.b}, c={self.c})"
+        return f"a={self.a}, b={self.b}, c={self.c}"
 
     @property
     def name(self):
@@ -49,6 +51,7 @@ class Distribution(BaseRealization):
 @click.option(
     "--lower",
     "-a",
+    "a",
     help="Lower limit of distribution",
     required=True,
     type=int,
@@ -56,6 +59,7 @@ class Distribution(BaseRealization):
 @click.option(
     "--upper",
     "-b",
+    "b",
     help="Upper limit of distribution",
     required=True,
     type=int,
@@ -63,6 +67,7 @@ class Distribution(BaseRealization):
 @click.option(
     "--mode",
     "-c",
+    "c",
     help="Mode of distribution",
     required=True,
     type=int,

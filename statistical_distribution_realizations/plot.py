@@ -2,6 +2,7 @@
 Simple module that generates a histogram from a CSV file.
 """
 
+from math import dist
 from statistical_distribution_realizations.dist_base import BaseRealization
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -23,13 +24,12 @@ def plot(
             data,
             legend=False,
             fill=False,
-            kde=True,
+            kde=True if distribution.type == "Discrete" else False,
         )
 
-        plt.axis("off")
-        plt.ylabel("")
-        plt.xlabel("")
-        plt.title(f"{distribution.name} {distribution.params}. N={number_of_points:,}")
+        params = f"({distribution.params})" if distribution.params else ""
+
+        plt.title(f"{distribution.name} {params} N={number_of_points:,}")
         plt.savefig(path_to_output_file, dpi=350)
 
     except Exception as e:

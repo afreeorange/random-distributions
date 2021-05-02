@@ -8,11 +8,15 @@ from abc import ABC, abstractmethod, abstractproperty
 
 class BaseRealization(ABC):
     @abstractproperty
-    def name(self):
+    def type(self):
         pass
 
     @abstractproperty
     def params(self):
+        pass
+
+    @abstractproperty
+    def name(self):
         pass
 
     @abstractmethod

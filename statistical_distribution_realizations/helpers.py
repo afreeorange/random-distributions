@@ -1,5 +1,4 @@
 import sys
-from logging import NullHandler
 
 import click
 import progressbar
@@ -17,6 +16,7 @@ def handle_generation(
     output_file: str,
     graph: bool,
 ) -> None:
+    log.info(f"{distribution.name} Distribution: {distribution.params}")
     log.info(f"Generating {number:,} realizations")
 
     try:
@@ -32,6 +32,7 @@ def handle_generation(
         ],
         max_value=number,
     ).start()
+
     o = output_file.rsplit(".", 1)[0]
     _output_file = f"{o}.txt"
     _output_graph = f"{o}.png"
@@ -39,7 +40,15 @@ def handle_generation(
     log.info(f"Writing output to {_output_file}")
     with open(_output_file, mode="w", encoding="utf-8") as f:
         for _ in range(number):
-            f.write(f"{str(distribution.realization())}\n")
+            X = distribution.realization()
+
+            # Standard Normal is the only one that returns a Tuple
+            # (because we use Box-Muller)
+            if isinstance(X, tuple):
+                f.write(f"{X[0]}, {X[1]}\n")
+            else:
+                f.write(f"{X}\n")
+
             bar.update(_ + 1)
 
     bar.finish()
@@ -49,7 +58,7 @@ def handle_generation(
         plot(_output_file, _output_graph, number, distribution)
 
 
-def common_cli_options(f):
+def common_cli_options(f) -> None:
     f = click.version_option(
         version=statistical_distribution_realizations.__version__,
     )(f)
@@ -57,8 +66,8 @@ def common_cli_options(f):
     f = click.option(
         "--number",
         "-n",
-        default=10000,
-        help="Number of realizations to generate. Default is 10,000.",
+        default=100000,
+        help="Number of realizations to generate. Default is 100,000.",
     )(f)
 
     f = click.option(

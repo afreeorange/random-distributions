@@ -1,7 +1,6 @@
 import logging
 import os
 
-import coloredlogs
 import progressbar
 
 from statistical_distribution_realizations import __name__
@@ -16,5 +15,3 @@ handler.setFormatter(logging.Formatter(LOGGING_FORMAT))
 
 log.addHandler(handler)
 log.setLevel(LEVEL)
-
-coloredlogs.install(logger=log, fmt=LOGGING_FORMAT)
