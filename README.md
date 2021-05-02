@@ -1,4 +1,4 @@
-# A Library of some Common Distributions Implemented in Python
+# A Small Library of some Common Statistical Distributions Implemented in Python
 
 ## Abstract
 
