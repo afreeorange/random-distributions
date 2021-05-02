@@ -138,6 +138,8 @@ Simple! Any new distribution must:
 
 You would implement the actual realization in the `self.realization` of your distribution's class. You would make sure the user's not doing anything funky in `self.check` by yelling at them by raising a simple `ValueError` with a message of why their input was funky.
 
+Just copypasta an existing distribution and follow along 🤗
+
 ### `examples` Generation
 
 ```console
