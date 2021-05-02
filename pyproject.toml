@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "random-distributions"
+name = "statistical-distribution-realizations"
 version = "0.1.0"
 description = "A Small Library of some Common Statistical Distributions Implemented in Python"
 authors = ["Nikhil Anand <mail@nikhil.io>"]
@@ -12,7 +12,7 @@ click = "^7.1.2"
 coloredlogs = "^15.0"
 
 [tool.poetry.scripts]
-generate = "random_distributions.cli:entry_point"
+realize = "statistical_distribution_realizations.cli:entry_point"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

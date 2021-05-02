@@ -2,8 +2,8 @@ from logging import NullHandler
 
 import click
 
-import random_distributions
-from random_distributions.dist_base import BaseRealization
+import statistical_distribution_realizations
+from statistical_distribution_realizations.dist_base import BaseRealization
 
 from .logger import log
 from .plot import plot
@@ -15,12 +15,11 @@ def handle_generation(
     output_file: str,
     graph: bool,
 ) -> None:
-    log.info(
-        f"Generating {number:,} realizations of the {distribution.name} distribution"
-    )
+    log.info(f"Generating {number:,} realizations")
 
-    _output_file = output_file.rsplit(".", 1)[0] + ".txt"
-    _output_graph = output_file.rsplit(".", 1)[0] + ".png"
+    o = output_file.rsplit(".", 1)[0]
+    _output_file = f"{o}.txt"
+    _output_graph = f"{o}.png"
 
     log.info(f"Writing output to {_output_file}")
     with open(_output_file, mode="w", encoding="utf-8") as f:
@@ -34,7 +33,7 @@ def handle_generation(
 
 def common_cli_options(f):
     f = click.version_option(
-        version=random_distributions.__version__,
+        version=statistical_distribution_realizations.__version__,
     )(f)
 
     f = click.option(

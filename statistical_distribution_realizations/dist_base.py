@@ -1,6 +1,6 @@
 """
 An simple Abstract Base Class for a realized distribution. Just makes sure that
-all realizations have some required common methods.
+all realizations have some required common methods and properties 💗
 """
 
 from abc import ABC, abstractmethod, abstractproperty
