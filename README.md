@@ -6,7 +6,7 @@ This is a small library of some common discrete and continuous distributions rea
 
 ## Usage
 
-You will need Python v3.9 and [Poetry](https://python-poetry.org/) installed globally to use this tool. The entry-point is a command called `realize`. 
+You will need Python v3.9 and [Poetry](https://python-poetry.org/) installed globally to use this tool. The entry-point is a command called `realize`.
 
 ### Overview
 
@@ -18,10 +18,12 @@ poetry install
 poetry run realize --help
 
 # See the input parameters for a particular distribution
-poetry run realise triangular --help
+poetry run realise weibull --help
 ```
 
-* The default number of realizations is set to 100,000. You can change this by supplying a `--number` parameter to any command. 
+👉 Please note that Poetry might take a while the first time you run `poetry run realize`!
+
+* The default number of realizations is set to 100,000. You can change this by supplying a `--number` parameter to any command.
 * Graphs are not drawn by default. You can generate a graph by supplying a `--graph` flag. The output is always a PNG file. Its name is derived from whatever you specifed as the `--output-file`.
 * Output files will be overwritten if they exist!
 
@@ -123,7 +125,7 @@ poetry run realize weibull --lambda 1 --shape 1.5 --output-file output.txt --gra
 
 ### Dependencies
 
-The project mainly uses 
+The project mainly uses
 
 * [Click](https://click.palletsprojects.com/en/7.x/) for the CLI
 * [Seaborn](https://seaborn.pydata.org/) (with Matplotlib and Pandas) for its graphs
