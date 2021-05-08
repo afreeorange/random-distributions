@@ -1,5 +1,5 @@
 import sys
-from typing import Callable, List, Union
+from typing import Callable
 
 import click
 import progressbar
@@ -31,17 +31,21 @@ def handle_generation(
     _output_graph = f"{o}.png"
 
     log.info(f"Writing output to {_output_file}")
+
     with open(_output_file, mode="w", encoding="utf-8") as f:
         # Poisson is slightly weird because it doesn't have any
         # point-realizations. You generate a set of Unif(0,1) and sort them
         # (and shift them if need be) for the interarrival times 🤷‍♂️ The
         # result in this case comes sorted. It's an array and not a single
         # number.
-
         if distribution.name == "Poisson":
             log.warn("Poisson distribution! Sorting might take some time for large n!")
-            for _ in distribution.realization():
-                f.write(f"{_}\n")
+
+            # There is no way to refine this type AFAIK
+            __ = distribution.realization()
+            if isinstance(__, list):
+                for _ in __:
+                    f.write(f"{_}\n")
 
         else:
             bar = progressbar.ProgressBar(
