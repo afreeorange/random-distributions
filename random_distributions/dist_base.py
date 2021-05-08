@@ -1,24 +1,28 @@
 """
 An simple Abstract Base Class for a realized distribution. Just makes sure that
-all realizations have some required common methods and properties 💗 Absolutely
-none of the type annotations work given that this is an Abstract Class. Just
-here for future exploration.
+all realizations have some required common methods and properties 💗 
+
+Still learning MyPy and haven't seen the type annotations show up in the
+derived class 🤷‍♂️. Just here for future exploration.
 """
 
-from abc import ABC, abstractmethod, abstractproperty
+from abc import ABCMeta, abstractmethod
 from typing import List, Tuple, Union, NoReturn
 
 
-class BaseRealization(ABC):
-    @abstractproperty
+class BaseRealization(ABCMeta):
+    @property
+    @abstractmethod
     def type(self) -> str:
         pass
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def params(self) -> str:
         pass
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def name(self) -> str:
         pass
 
