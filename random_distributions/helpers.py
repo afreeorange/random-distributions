@@ -1,11 +1,11 @@
 import sys
-from math import dist
+from typing import Callable, List, Union
 
 import click
 import progressbar
 
-import statistical_distribution_realizations
-from statistical_distribution_realizations.dist_base import BaseRealization
+import random_distributions
+from random_distributions.dist_base import BaseRealization
 
 from .logger import log
 from .plot import plot
@@ -71,9 +71,9 @@ def handle_generation(
         plot(_output_file, _output_graph, number, distribution)
 
 
-def common_cli_options(f) -> None:
+def common_cli_options(f: Callable) -> Callable:
     f = click.version_option(
-        version=statistical_distribution_realizations.__version__,
+        version=random_distributions.__version__,
     )(f)
 
     f = click.option(

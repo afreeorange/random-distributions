@@ -160,6 +160,10 @@ poetry run realize gamma --shape 1 --rate 0.5 --output-file examples/gamma-2.txt
 poetry run realize poisson -a 2 -b 18 --lambda 0.6 --output-file examples/poisson.txt --graph
 ```
 
+### References
+
+* [MyPy Cheatsheet](https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html#cheat-sheet-py3)
+
 ## License
 
 MIT

@@ -3,7 +3,7 @@ Simple module that generates a histogram from a CSV file.
 """
 
 from math import dist
-from statistical_distribution_realizations.dist_base import BaseRealization
+from random_distributions.dist_base import BaseRealization
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns

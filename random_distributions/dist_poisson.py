@@ -1,5 +1,5 @@
-import math
 from random import uniform
+from typing import List
 
 import click
 
